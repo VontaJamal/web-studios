@@ -66,7 +66,7 @@ function handleRequest(request, responseStatusCode, responseHeaders, remixContex
   });
 }
 
-// route:/Users/vonta/Documents/Code Repos/web-studios/app/root.tsx
+// app/root.tsx
 var root_exports = {};
 __export(root_exports, {
   default: () => App,
@@ -77,7 +77,7 @@ __export(root_exports, {
 var import_node3 = require("@remix-run/node"), import_react2 = require("@remix-run/react");
 
 // app/styles/tailwind.css
-var tailwind_default = "/build/_assets/tailwind-YUP6KX4A.css";
+var tailwind_default = "/build/_assets/tailwind-2HZGYYPV.css";
 
 // app/session.server.ts
 var import_node2 = require("@remix-run/node"), import_tiny_invariant = __toESM(require("tiny-invariant"));
@@ -182,7 +182,7 @@ async function logout(request) {
   });
 }
 
-// route:/Users/vonta/Documents/Code Repos/web-studios/app/root.tsx
+// app/root.tsx
 var links = () => [{ rel: "stylesheet", href: tailwind_default }], meta = () => ({
   charset: "utf-8",
   title: "Remix Notes",
@@ -202,7 +202,7 @@ function App() {
   }, /* @__PURE__ */ React.createElement(import_react2.Outlet, null), /* @__PURE__ */ React.createElement(import_react2.ScrollRestoration, null), /* @__PURE__ */ React.createElement(import_react2.Scripts, null), /* @__PURE__ */ React.createElement(import_react2.LiveReload, null)));
 }
 
-// route:/Users/vonta/Documents/Code Repos/web-studios/app/routes/healthcheck.tsx
+// app/routes/healthcheck.tsx
 var healthcheck_exports = {};
 __export(healthcheck_exports, {
   loader: () => loader2
@@ -223,7 +223,7 @@ async function loader2({ request }) {
   }
 }
 
-// route:/Users/vonta/Documents/Code Repos/web-studios/app/routes/posts/$slug.tsx
+// app/routes/posts/$slug.tsx
 var slug_exports = {};
 __export(slug_exports, {
   default: () => PostSlug,
@@ -242,7 +242,7 @@ async function createPost(post) {
   return prisma.post.create({ data: post });
 }
 
-// route:/Users/vonta/Documents/Code Repos/web-studios/app/routes/posts/$slug.tsx
+// app/routes/posts/$slug.tsx
 var loader3 = async ({ params }) => {
   (0, import_tiny_invariant2.default)(params.slug, "params.slug is required");
   let post = await getPost(params.slug);
@@ -261,7 +261,7 @@ function PostSlug() {
   }));
 }
 
-// route:/Users/vonta/Documents/Code Repos/web-studios/app/routes/posts/admin.tsx
+// app/routes/posts/admin.tsx
 var admin_exports = {};
 __export(admin_exports, {
   default: () => PostAdmin,
@@ -289,7 +289,7 @@ function PostAdmin() {
   }, /* @__PURE__ */ React.createElement(import_react4.Outlet, null))));
 }
 
-// route:/Users/vonta/Documents/Code Repos/web-studios/app/routes/posts/admin/$slug.tsx
+// app/routes/posts/admin/$slug.tsx
 var slug_exports2 = {};
 __export(slug_exports2, {
   loader: () => loader5
@@ -303,7 +303,7 @@ var loader5 = async ({ params }) => {
   return (0, import_node6.json)({ post, html });
 };
 
-// route:/Users/vonta/Documents/Code Repos/web-studios/app/routes/posts/admin/index.tsx
+// app/routes/posts/admin/index.tsx
 var admin_exports2 = {};
 __export(admin_exports2, {
   default: () => AdminIndex
@@ -316,7 +316,7 @@ function AdminIndex() {
   }, "Create a New Post"));
 }
 
-// route:/Users/vonta/Documents/Code Repos/web-studios/app/routes/posts/admin/new.tsx
+// app/routes/posts/admin/new.tsx
 var new_exports = {};
 __export(new_exports, {
   action: () => action,
@@ -367,7 +367,7 @@ function NewPost() {
   }, isCreating ? "Creating..." : "Create Post")));
 }
 
-// route:/Users/vonta/Documents/Code Repos/web-studios/app/routes/posts/index.tsx
+// app/routes/posts/index.tsx
 var posts_exports = {};
 __export(posts_exports, {
   default: () => Posts,
@@ -390,7 +390,7 @@ function Posts() {
   }, post.title)))));
 }
 
-// route:/Users/vonta/Documents/Code Repos/web-studios/app/routes/logout.tsx
+// app/routes/logout.tsx
 var logout_exports = {};
 __export(logout_exports, {
   action: () => action2,
@@ -404,7 +404,7 @@ async function loader7() {
   return (0, import_node9.redirect)("/");
 }
 
-// route:/Users/vonta/Documents/Code Repos/web-studios/app/routes/index.tsx
+// app/routes/index.tsx
 var routes_exports = {};
 __export(routes_exports, {
   default: () => Index
@@ -438,7 +438,7 @@ function validateEmail(email) {
   return typeof email == "string" && email.length > 3 && email.includes("@");
 }
 
-// route:/Users/vonta/Documents/Code Repos/web-studios/app/routes/index.tsx
+// app/routes/index.tsx
 function Index() {
   let user = useOptionalUser();
   return /* @__PURE__ */ React.createElement("main", {
@@ -559,7 +559,7 @@ function Index() {
   })))))));
 }
 
-// route:/Users/vonta/Documents/Code Repos/web-studios/app/routes/login.tsx
+// app/routes/login.tsx
 var login_exports = {};
 __export(login_exports, {
   action: () => action3,
@@ -669,7 +669,7 @@ function LoginPage() {
   }, "Sign up"))))));
 }
 
-// route:/Users/vonta/Documents/Code Repos/web-studios/app/routes/notes.tsx
+// app/routes/notes.tsx
 var notes_exports = {};
 __export(notes_exports, {
   default: () => NotesPage,
@@ -720,7 +720,7 @@ function deleteNote({
   });
 }
 
-// route:/Users/vonta/Documents/Code Repos/web-studios/app/routes/notes.tsx
+// app/routes/notes.tsx
 async function loader9({ request }) {
   let userId = await requireUserId(request), noteListItems = await getNoteListItems({ userId });
   return (0, import_node11.json)({ noteListItems });
@@ -760,7 +760,7 @@ function NotesPage() {
   }, /* @__PURE__ */ React.createElement(import_react12.Outlet, null))));
 }
 
-// route:/Users/vonta/Documents/Code Repos/web-studios/app/routes/notes/$noteId.tsx
+// app/routes/notes/$noteId.tsx
 var noteId_exports = {};
 __export(noteId_exports, {
   CatchBoundary: () => CatchBoundary,
@@ -807,7 +807,7 @@ function CatchBoundary() {
   throw new Error(`Unexpected caught response with status: ${caught.status}`);
 }
 
-// route:/Users/vonta/Documents/Code Repos/web-studios/app/routes/notes/index.tsx
+// app/routes/notes/index.tsx
 var notes_exports2 = {};
 __export(notes_exports2, {
   default: () => NoteIndexPage
@@ -820,7 +820,7 @@ function NoteIndexPage() {
   }, "create a new note."));
 }
 
-// route:/Users/vonta/Documents/Code Repos/web-studios/app/routes/notes/new.tsx
+// app/routes/notes/new.tsx
 var new_exports2 = {};
 __export(new_exports2, {
   action: () => action5,
@@ -881,7 +881,7 @@ function NewNotePage() {
   }, "Save")));
 }
 
-// route:/Users/vonta/Documents/Code Repos/web-studios/app/routes/join.tsx
+// app/routes/join.tsx
 var join_exports = {};
 __export(join_exports, {
   action: () => action6,
@@ -989,7 +989,7 @@ function Join() {
 }
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { version: "9539e0e9", entry: { module: "/build/entry.client-AADO7566.js", imports: ["/build/_shared/chunk-UKC4VJLO.js", "/build/_shared/chunk-NTN7YPXJ.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-5YTBL4DV.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/healthcheck": { id: "routes/healthcheck", parentId: "root", path: "healthcheck", index: void 0, caseSensitive: void 0, module: "/build/routes/healthcheck-7MKQYYGS.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-VGAJNMLU.js", imports: ["/build/_shared/chunk-X4HKXXWQ.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/join": { id: "routes/join", parentId: "root", path: "join", index: void 0, caseSensitive: void 0, module: "/build/routes/join-RGD5IL6C.js", imports: ["/build/_shared/chunk-BSRRWFSI.js", "/build/_shared/chunk-X4HKXXWQ.js", "/build/_shared/chunk-XMI3USBO.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/login": { id: "routes/login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/login-M6OQIUD3.js", imports: ["/build/_shared/chunk-BSRRWFSI.js", "/build/_shared/chunk-X4HKXXWQ.js", "/build/_shared/chunk-XMI3USBO.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/logout": { id: "routes/logout", parentId: "root", path: "logout", index: void 0, caseSensitive: void 0, module: "/build/routes/logout-JXVNWPJJ.js", imports: void 0, hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/notes": { id: "routes/notes", parentId: "root", path: "notes", index: void 0, caseSensitive: void 0, module: "/build/routes/notes-VOE6L5AA.js", imports: ["/build/_shared/chunk-X4HKXXWQ.js", "/build/_shared/chunk-ATZBVMZP.js", "/build/_shared/chunk-XMI3USBO.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/notes/$noteId": { id: "routes/notes/$noteId", parentId: "routes/notes", path: ":noteId", index: void 0, caseSensitive: void 0, module: "/build/routes/notes/$noteId-ALAZDWLA.js", imports: void 0, hasAction: !0, hasLoader: !0, hasCatchBoundary: !0, hasErrorBoundary: !0 }, "routes/notes/index": { id: "routes/notes/index", parentId: "routes/notes", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/notes/index-QFJDMHV6.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/notes/new": { id: "routes/notes/new", parentId: "routes/notes", path: "new", index: void 0, caseSensitive: void 0, module: "/build/routes/notes/new-VC2M2DTB.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/$slug": { id: "routes/posts/$slug", parentId: "root", path: "posts/:slug", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/$slug-ZBD53VZF.js", imports: ["/build/_shared/chunk-SUOXNGK2.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/admin": { id: "routes/posts/admin", parentId: "root", path: "posts/admin", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/admin-RNE55C3O.js", imports: ["/build/_shared/chunk-SUOXNGK2.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/admin/$slug": { id: "routes/posts/admin/$slug", parentId: "routes/posts/admin", path: ":slug", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/admin/$slug-CAOJ7GSY.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/admin/index": { id: "routes/posts/admin/index", parentId: "routes/posts/admin", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/posts/admin/index-4LF34XMQ.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/admin/new": { id: "routes/posts/admin/new", parentId: "routes/posts/admin", path: "new", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/admin/new-JF4VDB4F.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/index": { id: "routes/posts/index", parentId: "root", path: "posts", index: !0, caseSensitive: void 0, module: "/build/routes/posts/index-PYKETYIJ.js", imports: ["/build/_shared/chunk-SUOXNGK2.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-9539E0E9.js" };
+var assets_manifest_default = { version: "7c2799dd", entry: { module: "/build/entry.client-XCVOBGF5.js", imports: ["/build/_shared/chunk-FQMSJ6VX.js", "/build/_shared/chunk-NTN7YPXJ.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-P5TLFVU4.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/healthcheck": { id: "routes/healthcheck", parentId: "root", path: "healthcheck", index: void 0, caseSensitive: void 0, module: "/build/routes/healthcheck-H5HBAPFF.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-2AJ3TQ6P.js", imports: ["/build/_shared/chunk-3TVPF4ER.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/join": { id: "routes/join", parentId: "root", path: "join", index: void 0, caseSensitive: void 0, module: "/build/routes/join-L6NRWON7.js", imports: ["/build/_shared/chunk-BSRRWFSI.js", "/build/_shared/chunk-3TVPF4ER.js", "/build/_shared/chunk-XMI3USBO.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/login": { id: "routes/login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/login-3DML4AEA.js", imports: ["/build/_shared/chunk-BSRRWFSI.js", "/build/_shared/chunk-3TVPF4ER.js", "/build/_shared/chunk-XMI3USBO.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/logout": { id: "routes/logout", parentId: "root", path: "logout", index: void 0, caseSensitive: void 0, module: "/build/routes/logout-BLEMLIX5.js", imports: void 0, hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/notes": { id: "routes/notes", parentId: "root", path: "notes", index: void 0, caseSensitive: void 0, module: "/build/routes/notes-TNMFTVTQ.js", imports: ["/build/_shared/chunk-3TVPF4ER.js", "/build/_shared/chunk-ATZBVMZP.js", "/build/_shared/chunk-XMI3USBO.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/notes/$noteId": { id: "routes/notes/$noteId", parentId: "routes/notes", path: ":noteId", index: void 0, caseSensitive: void 0, module: "/build/routes/notes/$noteId-CSGG4XOX.js", imports: void 0, hasAction: !0, hasLoader: !0, hasCatchBoundary: !0, hasErrorBoundary: !0 }, "routes/notes/index": { id: "routes/notes/index", parentId: "routes/notes", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/notes/index-FIMHOXV3.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/notes/new": { id: "routes/notes/new", parentId: "routes/notes", path: "new", index: void 0, caseSensitive: void 0, module: "/build/routes/notes/new-XOI3F5WL.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/$slug": { id: "routes/posts/$slug", parentId: "root", path: "posts/:slug", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/$slug-4UGC4YZW.js", imports: ["/build/_shared/chunk-SUOXNGK2.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/admin": { id: "routes/posts/admin", parentId: "root", path: "posts/admin", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/admin-32RTY2FF.js", imports: ["/build/_shared/chunk-SUOXNGK2.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/admin/$slug": { id: "routes/posts/admin/$slug", parentId: "routes/posts/admin", path: ":slug", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/admin/$slug-WD7BBALX.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/admin/index": { id: "routes/posts/admin/index", parentId: "routes/posts/admin", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/posts/admin/index-FSEPYRKR.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/admin/new": { id: "routes/posts/admin/new", parentId: "routes/posts/admin", path: "new", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/admin/new-6WQER6ON.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/index": { id: "routes/posts/index", parentId: "root", path: "posts", index: !0, caseSensitive: void 0, module: "/build/routes/posts/index-LSP7J3FT.js", imports: ["/build/_shared/chunk-SUOXNGK2.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-7C2799DD.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var assetsBuildDirectory = "public/build", publicPath = "/build/", entry = { module: entry_server_exports }, routes = {
