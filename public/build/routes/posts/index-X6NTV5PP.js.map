@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["browser-route-module:/Users/vonta/Documents/Code Repos/web-studios/app/routes/posts/index.tsx?browser", "../../../../app/routes/posts/index.tsx"],
+  "sourcesContent": ["export { default } from \"/Users/vonta/Documents/Code Repos/web-studios/app/routes/posts/index.tsx\";", "import { json } from \"@remix-run/node\";\nimport { Link, useLoaderData } from \"@remix-run/react\";\n\ntype Post = {\n  slug: string;\n  title: string;\n};\n\ntype LoaderData = {\n  posts: Array<Post>;\n};\n\nexport const loader = async () => {\n  return json<LoaderData>({\n    posts: [\n      {\n        slug: \"my-first-post\",\n        title: \"My First Post\",\n      },\n      {\n        slug: \"90s-mixtape\",\n        title: \"A Mixtape I Made Just For You\",\n      },\n    ],\n  });\n};\n\nexport default function Posts() {\n  const { posts } = useLoaderData() as LoaderData;\n  console.log(posts);\n\n  return (\n    <main>\n      <ul>\n        {posts.map((post) => (\n          <li key={post.slug}>\n            <Link to={post.slug} className=\"text-blue-600 underline\">\n              {post.title}\n            </Link>\n          </li>\n        ))}\n      </ul>\n    </main>\n  );\n}\n"],
+  "mappings": ";;;;;;;;;;AAAA;;;ACAA;AA2Be,iBAAiB;AAC9B,QAAM,EAAE,UAAU;AAClB,UAAQ,IAAI;AAEZ,SACE,oCAAC,QAAD,MACE,oCAAC,MAAD,MACG,MAAM,IAAI,CAAC,SACV,oCAAC,MAAD;AAAA,IAAI,KAAK,KAAK;AAAA,KACZ,oCAAC,MAAD;AAAA,IAAM,IAAI,KAAK;AAAA,IAAM,WAAU;AAAA,KAC5B,KAAK;AAAA;",
+  "names": []
+}

@@ -1,0 +1,42 @@
+import {
+  require_post
+} from "/build/_shared/chunk-SUOXNGK2.js";
+import {
+  Link,
+  useLoaderData
+} from "/build/_shared/chunk-NIR6ZYUP.js";
+import {
+  React,
+  __toESM,
+  init_react
+} from "/build/_shared/chunk-NTN7YPXJ.js";
+
+// browser-route-module:/Users/vonta/Documents/Code Repos/web-studios/app/routes/posts/admin.tsx?browser
+init_react();
+
+// app/routes/posts/admin.tsx
+init_react();
+var import_post = __toESM(require_post());
+function PostAdmin() {
+  const { posts } = useLoaderData();
+  return /* @__PURE__ */ React.createElement("div", {
+    className: "mx-auto max-w-4xl"
+  }, /* @__PURE__ */ React.createElement("h1", {
+    className: "my-6 mb-2 border-b-2 text-center text-3xl"
+  }, "Blog Admin"), /* @__PURE__ */ React.createElement("div", {
+    className: "grid grid-cols-4 gap-6"
+  }, /* @__PURE__ */ React.createElement("nav", {
+    className: "col-span-4 md:col-span-1"
+  }, /* @__PURE__ */ React.createElement("ul", null, posts.map((post) => /* @__PURE__ */ React.createElement("li", {
+    key: post.slug
+  }, /* @__PURE__ */ React.createElement(Link, {
+    to: post.slug,
+    className: "text-blue-600 underline"
+  }, post.title))))), /* @__PURE__ */ React.createElement("main", {
+    className: "col-span-4 md:col-span-3"
+  }, "...")));
+}
+export {
+  PostAdmin as default
+};
+//# sourceMappingURL=/build/routes/posts/admin-7Z3DM47A.js.map

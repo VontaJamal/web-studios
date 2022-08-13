@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["browser-route-module:/Users/vonta/Documents/Code Repos/web-studios/app/routes/posts/$slug.tsx?browser", "../../../../app/routes/posts/$slug.tsx"],
+  "sourcesContent": ["export { default } from \"/Users/vonta/Documents/Code Repos/web-studios/app/routes/posts/$slug.tsx\";", "import { json } from \"@remix-run/node\";\nimport { useLoaderData } from \"@remix-run/react\";\n\nexport const loader = async ({ params }) => {\n  return json({ slug: params.slug });\n};\n\nexport default function PostSlug() {\n  const { slug } = useLoaderData();\n\n  return (\n    <main className=\"mx-auto max-w-4xl\">\n      <h1 className=\"my-6 border-b-2 text-center text-3xl\">Some Post</h1>\n    </main>\n  );\n}\n"],
+  "mappings": ";;;;;;;;;AAAA;;;ACAA;AAOe,oBAAoB;AACjC,QAAM,EAAE,SAAS;AAEjB,SACE,oCAAC,QAAD;AAAA,IAAM,WAAU;AAAA,KACd,oCAAC,MAAD;AAAA,IAAI,WAAU;AAAA,KAAuC;AAAA;",
+  "names": []
+}

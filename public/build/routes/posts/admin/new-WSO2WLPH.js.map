@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["browser-route-module:/Users/vonta/Documents/Code Repos/web-studios/app/routes/posts/admin/new.tsx?browser", "../../../../../app/routes/posts/admin/new.tsx"],
+  "sourcesContent": ["export { default } from \"/Users/vonta/Documents/Code Repos/web-studios/app/routes/posts/admin/new.tsx\";", "export default function NewPost() {\n  return <h2>New Post</h2>;\n}\n"],
+  "mappings": ";;;;;;AAAA;;;ACAA;AAAe,mBAAmB;AAChC,SAAO,oCAAC,MAAD,MAAI;AAAA;",
+  "names": []
+}

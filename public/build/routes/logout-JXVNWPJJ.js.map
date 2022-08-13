@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["browser-route-module:/Users/vonta/Documents/Code Repos/web-studios/app/routes/logout.tsx?browser"],
+  "sourcesContent": ["module.exports = {};"],
+  "mappings": ";;;;;;AAAA;AAAA;AAAA;AAAA,WAAO,UAAU;AAAA;AAAA;",
+  "names": []
+}

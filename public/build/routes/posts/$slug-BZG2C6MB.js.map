@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["browser-route-module:/Users/vonta/Documents/Code Repos/web-studios/app/routes/posts/$slug.tsx?browser", "../../../../app/routes/posts/$slug.tsx"],
+  "sourcesContent": ["export { default } from \"/Users/vonta/Documents/Code Repos/web-studios/app/routes/posts/$slug.tsx\";", "import type { LoaderFunction } from \"@remix-run/node\";\nimport { json } from \"@remix-run/node\";\nimport { useLoaderData } from \"@remix-run/react\";\n\nimport { getPost } from \"~/models/post.server\";\n\nexport const loader: LoaderFunction = async ({ params }) => {\n  const post = await getPost(params.slug);\n  return json({ post });\n};\n\nexport default function PostSlug() {\n  const { post } = useLoaderData();\n  return (\n    <main className=\"mx-auto max-w-4xl\">\n      <h1 className=\"my-6 border-b-2 text-center text-3xl\">{post.title}</h1>\n    </main>\n  );\n}\n"],
+  "mappings": ";;;;;;;;;;;;;AAAA;;;ACAA;AAIA,kBAAwB;AAOT,oBAAoB;AACjC,QAAM,EAAE,SAAS;AACjB,SACE,oCAAC,QAAD;AAAA,IAAM,WAAU;AAAA,KACd,oCAAC,MAAD;AAAA,IAAI,WAAU;AAAA,KAAwC,KAAK;AAAA;",
+  "names": []
+}
