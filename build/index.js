@@ -292,25 +292,75 @@ function PostAdmin() {
 // app/routes/posts/admin/$slug.tsx
 var slug_exports2 = {};
 __export(slug_exports2, {
+  action: () => action,
+  default: () => ManagePost,
   loader: () => loader5
 });
 var import_node6 = require("@remix-run/node"), import_marked2 = require("marked"), import_tiny_invariant3 = __toESM(require("tiny-invariant"));
-var loader5 = async ({ params }) => {
+var import_react5 = require("@remix-run/react"), import_react6 = require("react"), loader5 = async ({ params }) => {
   (0, import_tiny_invariant3.default)(params.slug, "params.slug is required");
   let post = await getPost(params.slug);
   (0, import_tiny_invariant3.default)(post, `Post not found: ${params.slug}`);
   let html = (0, import_marked2.marked)(post.markdown);
   return (0, import_node6.json)({ post, html });
+}, inputClassName = "w-full rounded border border-gray-500 px-2 py-1 text-lg", action = async ({ request }) => {
+  let formData = await request.formData(), title = formData.get("title"), slug = formData.get("slug"), markdown = formData.get("markdown");
+  (0, import_tiny_invariant3.default)(typeof title == "string", "title must be a string"), (0, import_tiny_invariant3.default)(typeof slug == "string", "slug must be a string"), (0, import_tiny_invariant3.default)(typeof markdown == "string", "markdown must be a string");
+  let errors = {
+    title: title ? null : "Title is required",
+    slug: slug ? null : "Slug is required",
+    markdown: markdown ? null : "Markdown is required"
+  };
+  return Object.values(errors).some((errorMessage) => errorMessage) ? (0, import_node6.json)(errors) : (await createPost({ title, slug, markdown }), (0, import_node6.redirect)("/posts/admin"));
 };
+function ManagePost() {
+  let { post } = (0, import_react5.useLoaderData)(), errors = (0, import_react5.useActionData)(), transition = (0, import_react5.useTransition)(), isUpdating = Boolean(transition.submission), [test, setTest] = (0, import_react6.useState)("");
+  return /* @__PURE__ */ React.createElement(import_react5.Form, {
+    method: "post"
+  }, /* @__PURE__ */ React.createElement("p", null, /* @__PURE__ */ React.createElement("label", null, "Post Title:", " ", (errors == null ? void 0 : errors.title) ? /* @__PURE__ */ React.createElement("em", {
+    className: "text-red-600"
+  }, errors.title) : null, /* @__PURE__ */ React.createElement("input", {
+    type: "text",
+    name: "title",
+    className: inputClassName,
+    defaultValue: post.title
+  }))), /* @__PURE__ */ React.createElement("p", null, /* @__PURE__ */ React.createElement("label", null, "Post Slug:", " ", (errors == null ? void 0 : errors.slug) ? /* @__PURE__ */ React.createElement("em", {
+    className: "text-red-600"
+  }, errors.slug) : null, /* @__PURE__ */ React.createElement("input", {
+    type: "text",
+    name: "slug",
+    className: inputClassName,
+    defaultValue: post.slug
+  }))), /* @__PURE__ */ React.createElement("p", null, /* @__PURE__ */ React.createElement("label", {
+    htmlFor: "markdown"
+  }, "Markdown:", " ", (errors == null ? void 0 : errors.markdown) ? /* @__PURE__ */ React.createElement("em", {
+    className: "text-red-600"
+  }, errors.markdown) : null), /* @__PURE__ */ React.createElement("br", null), /* @__PURE__ */ React.createElement("textarea", {
+    value: test || post.markdown,
+    name: "markdown",
+    id: "",
+    rows: 20,
+    className: `${inputClassName} font-mono`,
+    onChange: (e) => {
+      console.log("e.target.value", e.target.value), setTest(e.target.value), console.log("post.markdown", test);
+    }
+  })), /* @__PURE__ */ React.createElement("p", {
+    className: "text-right"
+  }, /* @__PURE__ */ React.createElement("button", {
+    type: "submit",
+    className: "rounded bg-blue-500 py-2 px-4 text-white hover:bg-blue-600 focus:bg-blue-400 disabled:bg-blue-300",
+    disabled: isUpdating
+  }, isUpdating ? "Updating..." : "Update Post")));
+}
 
 // app/routes/posts/admin/index.tsx
 var admin_exports2 = {};
 __export(admin_exports2, {
   default: () => AdminIndex
 });
-var import_react5 = require("@remix-run/react");
+var import_react7 = require("@remix-run/react");
 function AdminIndex() {
-  return /* @__PURE__ */ React.createElement("p", null, /* @__PURE__ */ React.createElement(import_react5.Link, {
+  return /* @__PURE__ */ React.createElement("p", null, /* @__PURE__ */ React.createElement(import_react7.Link, {
     to: "new",
     className: "text-blue-600 underline"
   }, "Create a New Post"));
@@ -319,11 +369,11 @@ function AdminIndex() {
 // app/routes/posts/admin/new.tsx
 var new_exports = {};
 __export(new_exports, {
-  action: () => action,
+  action: () => action2,
   default: () => NewPost
 });
-var import_node7 = require("@remix-run/node"), import_react6 = require("@remix-run/react");
-var import_tiny_invariant4 = __toESM(require("tiny-invariant")), inputClassName = "w-full rounded border border-gray-500 px-2 py-1 text-lg", action = async ({ request }) => {
+var import_node7 = require("@remix-run/node"), import_react8 = require("@remix-run/react");
+var import_tiny_invariant4 = __toESM(require("tiny-invariant")), inputClassName2 = "w-full rounded border border-gray-500 px-2 py-1 text-lg", action2 = async ({ request }) => {
   let formData = await request.formData(), title = formData.get("title"), slug = formData.get("slug"), markdown = formData.get("markdown");
   (0, import_tiny_invariant4.default)(typeof title == "string", "title must be a string"), (0, import_tiny_invariant4.default)(typeof slug == "string", "slug must be a string"), (0, import_tiny_invariant4.default)(typeof markdown == "string", "markdown must be a string");
   let errors = {
@@ -331,24 +381,24 @@ var import_tiny_invariant4 = __toESM(require("tiny-invariant")), inputClassName 
     slug: slug ? null : "Slug is required",
     markdown: markdown ? null : "Markdown is required"
   };
-  return Object.values(errors).some((errorMessage) => errorMessage) ? (0, import_node7.json)(errors) : (await new Promise((res) => setTimeout(res, 1e3)), await createPost({ title, slug, markdown }), (0, import_node7.redirect)("/posts/admin"));
+  return Object.values(errors).some((errorMessage) => errorMessage) ? (0, import_node7.json)(errors) : (await createPost({ title, slug, markdown }), (0, import_node7.redirect)("/posts/admin"));
 };
 function NewPost() {
-  let errors = (0, import_react6.useActionData)(), transition = (0, import_react6.useTransition)(), isCreating = Boolean(transition.submission);
-  return /* @__PURE__ */ React.createElement(import_react6.Form, {
+  let errors = (0, import_react8.useActionData)(), transition = (0, import_react8.useTransition)(), isCreating = Boolean(transition.submission);
+  return /* @__PURE__ */ React.createElement(import_react8.Form, {
     method: "post"
   }, /* @__PURE__ */ React.createElement("p", null, /* @__PURE__ */ React.createElement("label", null, "Post Title:", " ", (errors == null ? void 0 : errors.title) ? /* @__PURE__ */ React.createElement("em", {
     className: "text-red-600"
   }, errors.title) : null, /* @__PURE__ */ React.createElement("input", {
     type: "text",
     name: "title",
-    className: inputClassName
+    className: inputClassName2
   }))), /* @__PURE__ */ React.createElement("p", null, /* @__PURE__ */ React.createElement("label", null, "Post Slug:", " ", (errors == null ? void 0 : errors.slug) ? /* @__PURE__ */ React.createElement("em", {
     className: "text-red-600"
   }, errors.slug) : null, /* @__PURE__ */ React.createElement("input", {
     type: "text",
     name: "slug",
-    className: inputClassName
+    className: inputClassName2
   }))), /* @__PURE__ */ React.createElement("p", null, /* @__PURE__ */ React.createElement("label", {
     htmlFor: "markdown"
   }, "Markdown:", " ", (errors == null ? void 0 : errors.markdown) ? /* @__PURE__ */ React.createElement("em", {
@@ -357,7 +407,7 @@ function NewPost() {
     id: "markdown",
     rows: 20,
     name: "markdown",
-    className: `${inputClassName} font-mono`
+    className: `${inputClassName2} font-mono`
   })), /* @__PURE__ */ React.createElement("p", {
     className: "text-right"
   }, /* @__PURE__ */ React.createElement("button", {
@@ -373,18 +423,18 @@ __export(posts_exports, {
   default: () => Posts,
   loader: () => loader6
 });
-var import_node8 = require("@remix-run/node"), import_react7 = require("@remix-run/react");
+var import_node8 = require("@remix-run/node"), import_react9 = require("@remix-run/react");
 var loader6 = async () => (0, import_node8.json)({
   posts: await getPosts()
 });
 function Posts() {
-  let { posts } = (0, import_react7.useLoaderData)();
-  return console.log(posts), /* @__PURE__ */ React.createElement("main", null, /* @__PURE__ */ React.createElement(import_react7.Link, {
+  let { posts } = (0, import_react9.useLoaderData)();
+  return console.log(posts), /* @__PURE__ */ React.createElement("main", null, /* @__PURE__ */ React.createElement(import_react9.Link, {
     to: "admin",
     className: "text-red-600 underline"
   }, "Admin"), /* @__PURE__ */ React.createElement("ul", null, posts.map((post) => /* @__PURE__ */ React.createElement("li", {
     key: post.slug
-  }, /* @__PURE__ */ React.createElement(import_react7.Link, {
+  }, /* @__PURE__ */ React.createElement(import_react9.Link, {
     to: post.slug,
     className: "text-blue-600 underline"
   }, post.title)))));
@@ -393,11 +443,11 @@ function Posts() {
 // app/routes/logout.tsx
 var logout_exports = {};
 __export(logout_exports, {
-  action: () => action2,
+  action: () => action3,
   loader: () => loader7
 });
 var import_node9 = require("@remix-run/node");
-async function action2({ request }) {
+async function action3({ request }) {
   return logout(request);
 }
 async function loader7() {
@@ -409,15 +459,15 @@ var routes_exports = {};
 __export(routes_exports, {
   default: () => Index
 });
-var import_react10 = require("@remix-run/react");
+var import_react12 = require("@remix-run/react");
 
 // app/utils.ts
-var import_react8 = require("@remix-run/react"), import_react9 = require("react"), DEFAULT_REDIRECT = "/";
+var import_react10 = require("@remix-run/react"), import_react11 = require("react"), DEFAULT_REDIRECT = "/";
 function safeRedirect(to, defaultRedirect = DEFAULT_REDIRECT) {
   return !to || typeof to != "string" || !to.startsWith("/") || to.startsWith("//") ? defaultRedirect : to;
 }
 function useMatchesData(id) {
-  let matchingRoutes = (0, import_react8.useMatches)(), route = (0, import_react9.useMemo)(() => matchingRoutes.find((route2) => route2.id === id), [matchingRoutes, id]);
+  let matchingRoutes = (0, import_react10.useMatches)(), route = (0, import_react11.useMemo)(() => matchingRoutes.find((route2) => route2.id === id), [matchingRoutes, id]);
   return route == null ? void 0 : route.data;
 }
 function isUser(user) {
@@ -467,15 +517,15 @@ function Index() {
     className: "mx-auto mt-6 max-w-lg text-center text-xl text-white sm:max-w-3xl"
   }, "Check the README.md file for instructions on how to get this project deployed."), /* @__PURE__ */ React.createElement("div", {
     className: "mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center"
-  }, user ? /* @__PURE__ */ React.createElement(import_react10.Link, {
+  }, user ? /* @__PURE__ */ React.createElement(import_react12.Link, {
     to: "/notes",
     className: "flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium text-yellow-700 shadow-sm hover:bg-yellow-50 sm:px-8"
   }, "View Notes for ", user.email) : /* @__PURE__ */ React.createElement("div", {
     className: "space-y-4 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5 sm:space-y-0"
-  }, /* @__PURE__ */ React.createElement(import_react10.Link, {
+  }, /* @__PURE__ */ React.createElement(import_react12.Link, {
     to: "/join",
     className: "flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium text-yellow-700 shadow-sm hover:bg-yellow-50 sm:px-8"
-  }, "Sign up"), /* @__PURE__ */ React.createElement(import_react10.Link, {
+  }, "Sign up"), /* @__PURE__ */ React.createElement(import_react12.Link, {
     to: "/login",
     className: "flex items-center justify-center rounded-md bg-yellow-500 px-4 py-3 font-medium text-white hover:bg-yellow-600  "
   }, "Log In"))), /* @__PURE__ */ React.createElement("a", {
@@ -488,7 +538,7 @@ function Index() {
     className: "mx-auto max-w-7xl py-2 px-4 sm:px-6 lg:px-8"
   }, /* @__PURE__ */ React.createElement("div", {
     className: "mx-auto mt-16 max-w-7xl text-center"
-  }, /* @__PURE__ */ React.createElement(import_react10.Link, {
+  }, /* @__PURE__ */ React.createElement(import_react12.Link, {
     to: "/posts",
     className: "text-xl text-blue-600 underline"
   }, "Blog Posts")), /* @__PURE__ */ React.createElement("div", {
@@ -562,16 +612,16 @@ function Index() {
 // app/routes/login.tsx
 var login_exports = {};
 __export(login_exports, {
-  action: () => action3,
+  action: () => action4,
   default: () => LoginPage,
   loader: () => loader8,
   meta: () => meta2
 });
-var import_node10 = require("@remix-run/node"), import_react11 = require("@remix-run/react"), React2 = __toESM(require("react"));
+var import_node10 = require("@remix-run/node"), import_react13 = require("@remix-run/react"), React2 = __toESM(require("react"));
 async function loader8({ request }) {
   return await getUserId(request) ? (0, import_node10.redirect)("/") : (0, import_node10.json)({});
 }
-async function action3({ request }) {
+async function action4({ request }) {
   let formData = await request.formData(), email = formData.get("email"), password = formData.get("password"), redirectTo = safeRedirect(formData.get("redirectTo"), "/notes"), remember = formData.get("remember");
   if (!validateEmail(email))
     return (0, import_node10.json)({ errors: { email: "Email is invalid", password: null } }, { status: 400 });
@@ -592,7 +642,7 @@ var meta2 = () => ({
 });
 function LoginPage() {
   var _a, _b, _c, _d;
-  let [searchParams] = (0, import_react11.useSearchParams)(), redirectTo = searchParams.get("redirectTo") || "/notes", actionData = (0, import_react11.useActionData)(), emailRef = React2.useRef(null), passwordRef = React2.useRef(null);
+  let [searchParams] = (0, import_react13.useSearchParams)(), redirectTo = searchParams.get("redirectTo") || "/notes", actionData = (0, import_react13.useActionData)(), emailRef = React2.useRef(null), passwordRef = React2.useRef(null);
   return React2.useEffect(() => {
     var _a2, _b2, _c2, _d2;
     ((_a2 = actionData == null ? void 0 : actionData.errors) == null ? void 0 : _a2.email) ? (_b2 = emailRef.current) == null || _b2.focus() : ((_c2 = actionData == null ? void 0 : actionData.errors) == null ? void 0 : _c2.password) && ((_d2 = passwordRef.current) == null || _d2.focus());
@@ -600,7 +650,7 @@ function LoginPage() {
     className: "flex min-h-full flex-col justify-center"
   }, /* @__PURE__ */ React2.createElement("div", {
     className: "mx-auto w-full max-w-md px-8"
-  }, /* @__PURE__ */ React2.createElement(import_react11.Form, {
+  }, /* @__PURE__ */ React2.createElement(import_react13.Form, {
     method: "post",
     className: "space-y-6"
   }, /* @__PURE__ */ React2.createElement("div", null, /* @__PURE__ */ React2.createElement("label", {
@@ -660,7 +710,7 @@ function LoginPage() {
     className: "ml-2 block text-sm text-gray-900"
   }, "Remember me")), /* @__PURE__ */ React2.createElement("div", {
     className: "text-center text-sm text-gray-500"
-  }, "Don't have an account?", " ", /* @__PURE__ */ React2.createElement(import_react11.Link, {
+  }, "Don't have an account?", " ", /* @__PURE__ */ React2.createElement(import_react13.Link, {
     className: "text-blue-500 underline",
     to: {
       pathname: "/join",
@@ -675,7 +725,7 @@ __export(notes_exports, {
   default: () => NotesPage,
   loader: () => loader9
 });
-var import_node11 = require("@remix-run/node"), import_react12 = require("@remix-run/react");
+var import_node11 = require("@remix-run/node"), import_react14 = require("@remix-run/react");
 
 // app/models/note.server.ts
 function getNote({
@@ -726,16 +776,16 @@ async function loader9({ request }) {
   return (0, import_node11.json)({ noteListItems });
 }
 function NotesPage() {
-  let data = (0, import_react12.useLoaderData)(), user = useUser();
+  let data = (0, import_react14.useLoaderData)(), user = useUser();
   return /* @__PURE__ */ React.createElement("div", {
     className: "flex h-full min-h-screen flex-col"
   }, /* @__PURE__ */ React.createElement("header", {
     className: "flex items-center justify-between bg-slate-800 p-4 text-white"
   }, /* @__PURE__ */ React.createElement("h1", {
     className: "text-3xl font-bold"
-  }, /* @__PURE__ */ React.createElement(import_react12.Link, {
+  }, /* @__PURE__ */ React.createElement(import_react14.Link, {
     to: "."
-  }, "Notes")), /* @__PURE__ */ React.createElement("p", null, user.email), /* @__PURE__ */ React.createElement(import_react12.Form, {
+  }, "Notes")), /* @__PURE__ */ React.createElement("p", null, user.email), /* @__PURE__ */ React.createElement(import_react14.Form, {
     action: "/logout",
     method: "post"
   }, /* @__PURE__ */ React.createElement("button", {
@@ -745,19 +795,19 @@ function NotesPage() {
     className: "flex h-full bg-white"
   }, /* @__PURE__ */ React.createElement("div", {
     className: "h-full w-80 border-r bg-gray-50"
-  }, /* @__PURE__ */ React.createElement(import_react12.Link, {
+  }, /* @__PURE__ */ React.createElement(import_react14.Link, {
     to: "new",
     className: "block p-4 text-xl text-blue-500"
   }, "+ New Note"), /* @__PURE__ */ React.createElement("hr", null), data.noteListItems.length === 0 ? /* @__PURE__ */ React.createElement("p", {
     className: "p-4"
   }, "No notes yet") : /* @__PURE__ */ React.createElement("ol", null, data.noteListItems.map((note) => /* @__PURE__ */ React.createElement("li", {
     key: note.id
-  }, /* @__PURE__ */ React.createElement(import_react12.NavLink, {
+  }, /* @__PURE__ */ React.createElement(import_react14.NavLink, {
     className: ({ isActive }) => `block border-b p-4 text-xl ${isActive ? "bg-white" : ""}`,
     to: note.id
   }, "\u{1F4DD} ", note.title))))), /* @__PURE__ */ React.createElement("div", {
     className: "flex-1 p-6"
-  }, /* @__PURE__ */ React.createElement(import_react12.Outlet, null))));
+  }, /* @__PURE__ */ React.createElement(import_react14.Outlet, null))));
 }
 
 // app/routes/notes/$noteId.tsx
@@ -765,11 +815,11 @@ var noteId_exports = {};
 __export(noteId_exports, {
   CatchBoundary: () => CatchBoundary,
   ErrorBoundary: () => ErrorBoundary,
-  action: () => action4,
+  action: () => action5,
   default: () => NoteDetailsPage,
   loader: () => loader10
 });
-var import_node12 = require("@remix-run/node"), import_react13 = require("@remix-run/react"), import_tiny_invariant5 = __toESM(require("tiny-invariant"));
+var import_node12 = require("@remix-run/node"), import_react15 = require("@remix-run/react"), import_tiny_invariant5 = __toESM(require("tiny-invariant"));
 async function loader10({ request, params }) {
   let userId = await requireUserId(request);
   (0, import_tiny_invariant5.default)(params.noteId, "noteId not found");
@@ -778,19 +828,19 @@ async function loader10({ request, params }) {
     throw new Response("Not Found", { status: 404 });
   return (0, import_node12.json)({ note });
 }
-async function action4({ request, params }) {
+async function action5({ request, params }) {
   let userId = await requireUserId(request);
   return (0, import_tiny_invariant5.default)(params.noteId, "noteId not found"), await deleteNote({ userId, id: params.noteId }), (0, import_node12.redirect)("/notes");
 }
 function NoteDetailsPage() {
-  let data = (0, import_react13.useLoaderData)();
+  let data = (0, import_react15.useLoaderData)();
   return /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("h3", {
     className: "text-2xl font-bold"
   }, data.note.title), /* @__PURE__ */ React.createElement("p", {
     className: "py-6"
   }, data.note.body), /* @__PURE__ */ React.createElement("hr", {
     className: "my-4"
-  }), /* @__PURE__ */ React.createElement(import_react13.Form, {
+  }), /* @__PURE__ */ React.createElement(import_react15.Form, {
     method: "post"
   }, /* @__PURE__ */ React.createElement("button", {
     type: "submit",
@@ -801,7 +851,7 @@ function ErrorBoundary({ error }) {
   return console.error(error), /* @__PURE__ */ React.createElement("div", null, "An unexpected error occurred: ", error.message);
 }
 function CatchBoundary() {
-  let caught = (0, import_react13.useCatch)();
+  let caught = (0, import_react15.useCatch)();
   if (caught.status === 404)
     return /* @__PURE__ */ React.createElement("div", null, "Note not found");
   throw new Error(`Unexpected caught response with status: ${caught.status}`);
@@ -812,9 +862,9 @@ var notes_exports2 = {};
 __export(notes_exports2, {
   default: () => NoteIndexPage
 });
-var import_react14 = require("@remix-run/react");
+var import_react16 = require("@remix-run/react");
 function NoteIndexPage() {
-  return /* @__PURE__ */ React.createElement("p", null, "No note selected. Select a note on the left, or", " ", /* @__PURE__ */ React.createElement(import_react14.Link, {
+  return /* @__PURE__ */ React.createElement("p", null, "No note selected. Select a note on the left, or", " ", /* @__PURE__ */ React.createElement(import_react16.Link, {
     to: "new",
     className: "text-blue-500 underline"
   }, "create a new note."));
@@ -823,11 +873,11 @@ function NoteIndexPage() {
 // app/routes/notes/new.tsx
 var new_exports2 = {};
 __export(new_exports2, {
-  action: () => action5,
+  action: () => action6,
   default: () => NewNotePage
 });
-var import_node13 = require("@remix-run/node"), import_react15 = require("@remix-run/react"), React3 = __toESM(require("react"));
-async function action5({ request }) {
+var import_node13 = require("@remix-run/node"), import_react17 = require("@remix-run/react"), React3 = __toESM(require("react"));
+async function action6({ request }) {
   let userId = await requireUserId(request), formData = await request.formData(), title = formData.get("title"), body = formData.get("body");
   if (typeof title != "string" || title.length === 0)
     return (0, import_node13.json)({ errors: { title: "Title is required", body: null } }, { status: 400 });
@@ -838,11 +888,11 @@ async function action5({ request }) {
 }
 function NewNotePage() {
   var _a, _b, _c, _d, _e, _f;
-  let actionData = (0, import_react15.useActionData)(), titleRef = React3.useRef(null), bodyRef = React3.useRef(null);
+  let actionData = (0, import_react17.useActionData)(), titleRef = React3.useRef(null), bodyRef = React3.useRef(null);
   return React3.useEffect(() => {
     var _a2, _b2, _c2, _d2;
     ((_a2 = actionData == null ? void 0 : actionData.errors) == null ? void 0 : _a2.title) ? (_b2 = titleRef.current) == null || _b2.focus() : ((_c2 = actionData == null ? void 0 : actionData.errors) == null ? void 0 : _c2.body) && ((_d2 = bodyRef.current) == null || _d2.focus());
-  }, [actionData]), /* @__PURE__ */ React3.createElement(import_react15.Form, {
+  }, [actionData]), /* @__PURE__ */ React3.createElement(import_react17.Form, {
     method: "post",
     style: {
       display: "flex",
@@ -884,16 +934,16 @@ function NewNotePage() {
 // app/routes/join.tsx
 var join_exports = {};
 __export(join_exports, {
-  action: () => action6,
+  action: () => action7,
   default: () => Join,
   loader: () => loader11,
   meta: () => meta3
 });
-var import_node14 = require("@remix-run/node"), import_react16 = require("@remix-run/react"), React4 = __toESM(require("react"));
+var import_node14 = require("@remix-run/node"), import_react18 = require("@remix-run/react"), React4 = __toESM(require("react"));
 async function loader11({ request }) {
   return await getUserId(request) ? (0, import_node14.redirect)("/") : (0, import_node14.json)({});
 }
-async function action6({ request }) {
+async function action7({ request }) {
   let formData = await request.formData(), email = formData.get("email"), password = formData.get("password"), redirectTo = safeRedirect(formData.get("redirectTo"), "/");
   if (!validateEmail(email))
     return (0, import_node14.json)({ errors: { email: "Email is invalid", password: null } }, { status: 400 });
@@ -921,7 +971,7 @@ var meta3 = () => ({
 });
 function Join() {
   var _a, _b, _c, _d;
-  let [searchParams] = (0, import_react16.useSearchParams)(), redirectTo = searchParams.get("redirectTo") ?? void 0, actionData = (0, import_react16.useActionData)(), emailRef = React4.useRef(null), passwordRef = React4.useRef(null);
+  let [searchParams] = (0, import_react18.useSearchParams)(), redirectTo = searchParams.get("redirectTo") ?? void 0, actionData = (0, import_react18.useActionData)(), emailRef = React4.useRef(null), passwordRef = React4.useRef(null);
   return React4.useEffect(() => {
     var _a2, _b2, _c2, _d2;
     ((_a2 = actionData == null ? void 0 : actionData.errors) == null ? void 0 : _a2.email) ? (_b2 = emailRef.current) == null || _b2.focus() : ((_c2 = actionData == null ? void 0 : actionData.errors) == null ? void 0 : _c2.password) && ((_d2 = passwordRef.current) == null || _d2.focus());
@@ -929,7 +979,7 @@ function Join() {
     className: "flex min-h-full flex-col justify-center"
   }, /* @__PURE__ */ React4.createElement("div", {
     className: "mx-auto w-full max-w-md px-8"
-  }, /* @__PURE__ */ React4.createElement(import_react16.Form, {
+  }, /* @__PURE__ */ React4.createElement(import_react18.Form, {
     method: "post",
     className: "space-y-6"
   }, /* @__PURE__ */ React4.createElement("div", null, /* @__PURE__ */ React4.createElement("label", {
@@ -979,7 +1029,7 @@ function Join() {
     className: "flex items-center justify-center"
   }, /* @__PURE__ */ React4.createElement("div", {
     className: "text-center text-sm text-gray-500"
-  }, "Already have an account?", " ", /* @__PURE__ */ React4.createElement(import_react16.Link, {
+  }, "Already have an account?", " ", /* @__PURE__ */ React4.createElement(import_react18.Link, {
     className: "text-blue-500 underline",
     to: {
       pathname: "/login",
@@ -989,7 +1039,7 @@ function Join() {
 }
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { version: "7c2799dd", entry: { module: "/build/entry.client-XCVOBGF5.js", imports: ["/build/_shared/chunk-FQMSJ6VX.js", "/build/_shared/chunk-NTN7YPXJ.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-P5TLFVU4.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/healthcheck": { id: "routes/healthcheck", parentId: "root", path: "healthcheck", index: void 0, caseSensitive: void 0, module: "/build/routes/healthcheck-H5HBAPFF.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-2AJ3TQ6P.js", imports: ["/build/_shared/chunk-3TVPF4ER.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/join": { id: "routes/join", parentId: "root", path: "join", index: void 0, caseSensitive: void 0, module: "/build/routes/join-L6NRWON7.js", imports: ["/build/_shared/chunk-BSRRWFSI.js", "/build/_shared/chunk-3TVPF4ER.js", "/build/_shared/chunk-XMI3USBO.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/login": { id: "routes/login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/login-3DML4AEA.js", imports: ["/build/_shared/chunk-BSRRWFSI.js", "/build/_shared/chunk-3TVPF4ER.js", "/build/_shared/chunk-XMI3USBO.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/logout": { id: "routes/logout", parentId: "root", path: "logout", index: void 0, caseSensitive: void 0, module: "/build/routes/logout-BLEMLIX5.js", imports: void 0, hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/notes": { id: "routes/notes", parentId: "root", path: "notes", index: void 0, caseSensitive: void 0, module: "/build/routes/notes-TNMFTVTQ.js", imports: ["/build/_shared/chunk-3TVPF4ER.js", "/build/_shared/chunk-ATZBVMZP.js", "/build/_shared/chunk-XMI3USBO.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/notes/$noteId": { id: "routes/notes/$noteId", parentId: "routes/notes", path: ":noteId", index: void 0, caseSensitive: void 0, module: "/build/routes/notes/$noteId-CSGG4XOX.js", imports: void 0, hasAction: !0, hasLoader: !0, hasCatchBoundary: !0, hasErrorBoundary: !0 }, "routes/notes/index": { id: "routes/notes/index", parentId: "routes/notes", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/notes/index-FIMHOXV3.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/notes/new": { id: "routes/notes/new", parentId: "routes/notes", path: "new", index: void 0, caseSensitive: void 0, module: "/build/routes/notes/new-XOI3F5WL.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/$slug": { id: "routes/posts/$slug", parentId: "root", path: "posts/:slug", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/$slug-4UGC4YZW.js", imports: ["/build/_shared/chunk-SUOXNGK2.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/admin": { id: "routes/posts/admin", parentId: "root", path: "posts/admin", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/admin-32RTY2FF.js", imports: ["/build/_shared/chunk-SUOXNGK2.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/admin/$slug": { id: "routes/posts/admin/$slug", parentId: "routes/posts/admin", path: ":slug", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/admin/$slug-WD7BBALX.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/admin/index": { id: "routes/posts/admin/index", parentId: "routes/posts/admin", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/posts/admin/index-FSEPYRKR.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/admin/new": { id: "routes/posts/admin/new", parentId: "routes/posts/admin", path: "new", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/admin/new-6WQER6ON.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/index": { id: "routes/posts/index", parentId: "root", path: "posts", index: !0, caseSensitive: void 0, module: "/build/routes/posts/index-LSP7J3FT.js", imports: ["/build/_shared/chunk-SUOXNGK2.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-7C2799DD.js" };
+var assets_manifest_default = { version: "8852554b", entry: { module: "/build/entry.client-JY4NRR3H.js", imports: ["/build/_shared/chunk-FQMSJ6VX.js", "/build/_shared/chunk-NTN7YPXJ.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-P5TLFVU4.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/healthcheck": { id: "routes/healthcheck", parentId: "root", path: "healthcheck", index: void 0, caseSensitive: void 0, module: "/build/routes/healthcheck-H5HBAPFF.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-2AJ3TQ6P.js", imports: ["/build/_shared/chunk-3TVPF4ER.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/join": { id: "routes/join", parentId: "root", path: "join", index: void 0, caseSensitive: void 0, module: "/build/routes/join-L6NRWON7.js", imports: ["/build/_shared/chunk-BSRRWFSI.js", "/build/_shared/chunk-3TVPF4ER.js", "/build/_shared/chunk-XMI3USBO.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/login": { id: "routes/login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/login-3DML4AEA.js", imports: ["/build/_shared/chunk-BSRRWFSI.js", "/build/_shared/chunk-3TVPF4ER.js", "/build/_shared/chunk-XMI3USBO.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/logout": { id: "routes/logout", parentId: "root", path: "logout", index: void 0, caseSensitive: void 0, module: "/build/routes/logout-BLEMLIX5.js", imports: void 0, hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/notes": { id: "routes/notes", parentId: "root", path: "notes", index: void 0, caseSensitive: void 0, module: "/build/routes/notes-TNMFTVTQ.js", imports: ["/build/_shared/chunk-3TVPF4ER.js", "/build/_shared/chunk-ATZBVMZP.js", "/build/_shared/chunk-XMI3USBO.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/notes/$noteId": { id: "routes/notes/$noteId", parentId: "routes/notes", path: ":noteId", index: void 0, caseSensitive: void 0, module: "/build/routes/notes/$noteId-CSGG4XOX.js", imports: void 0, hasAction: !0, hasLoader: !0, hasCatchBoundary: !0, hasErrorBoundary: !0 }, "routes/notes/index": { id: "routes/notes/index", parentId: "routes/notes", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/notes/index-FIMHOXV3.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/notes/new": { id: "routes/notes/new", parentId: "routes/notes", path: "new", index: void 0, caseSensitive: void 0, module: "/build/routes/notes/new-XOI3F5WL.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/$slug": { id: "routes/posts/$slug", parentId: "root", path: "posts/:slug", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/$slug-ZPMJS3HR.js", imports: ["/build/_shared/chunk-G5R2CYFY.js", "/build/_shared/chunk-SUOXNGK2.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/admin": { id: "routes/posts/admin", parentId: "root", path: "posts/admin", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/admin-32RTY2FF.js", imports: ["/build/_shared/chunk-SUOXNGK2.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/admin/$slug": { id: "routes/posts/admin/$slug", parentId: "routes/posts/admin", path: ":slug", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/admin/$slug-DX3CZ53Q.js", imports: ["/build/_shared/chunk-G5R2CYFY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/admin/index": { id: "routes/posts/admin/index", parentId: "routes/posts/admin", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/posts/admin/index-FSEPYRKR.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/admin/new": { id: "routes/posts/admin/new", parentId: "routes/posts/admin", path: "new", index: void 0, caseSensitive: void 0, module: "/build/routes/posts/admin/new-SNCU467E.js", imports: void 0, hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/posts/index": { id: "routes/posts/index", parentId: "root", path: "posts", index: !0, caseSensitive: void 0, module: "/build/routes/posts/index-LSP7J3FT.js", imports: ["/build/_shared/chunk-SUOXNGK2.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-8852554B.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var assetsBuildDirectory = "public/build", publicPath = "/build/", entry = { module: entry_server_exports }, routes = {

@@ -37,8 +37,6 @@ export const action: ActionFunction = async ({ request }) => {
     return json<ActionData>(errors);
   }
 
-  // TODO: remove me
-  await new Promise((res) => setTimeout(res, 1000));
   await createPost({ title, slug, markdown });
 
   return redirect("/posts/admin");
