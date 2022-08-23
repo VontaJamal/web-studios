@@ -1,4 +1,21 @@
+import { json } from "@remix-run/node";
+import { Link, useLoaderData } from "@remix-run/react";
+import { getPosts } from "~/models/post.server";
+
+type LoaderData = {
+  posts: Awaited<ReturnType<typeof getPosts>>;
+};
+
+export const loader = async () => {
+  return json<LoaderData>({
+    posts: await getPosts(),
+  });
+};
+
 export default function Index() {
+  const { posts } = useLoaderData() as LoaderData;
+  console.log('posts', posts)
+
   return (
     <div className="min-h-full">
       <nav className="border-b border-gray-200 bg-white">
@@ -41,9 +58,13 @@ export default function Index() {
         <main>
           <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
             {/* <!-- Replace with your content --> */}
-            <div className="px-4 py-8 sm:px-0">
-              <div className="h-96 rounded-lg border-4 border-dashed border-gray-200"></div>
-            </div>
+            {posts.map((post) => (
+              <li key={post.slug}>
+                <Link to={post.slug} className="text-blue-600 underline">
+                  {post.title}
+                </Link>
+              </li>
+            ))}
             {/* <!-- /End replace --> */}
           </div>
         </main>
