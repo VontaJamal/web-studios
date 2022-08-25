@@ -28,7 +28,7 @@ async function seed() {
     {
       slug: "my-first-post",
       title: "My First Post",
-      image: "https://imgur.com/4HMYYSk",
+      image: "https://i.imgur.com/4HMYYSkm.png",
       markdown: `
 # This is my first post
 
@@ -38,7 +38,7 @@ Isn't it great?
     {
       slug: "90s-mixtape",
       title: "A Mixtape I Made Just For You",
-      image: "https://imgur.com/4HMYYSk",
+      image: "https://i.imgur.com/4HMYYSkm.png",
       markdown: `
 # 90s Mixtape
 
