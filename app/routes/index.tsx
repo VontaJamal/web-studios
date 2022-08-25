@@ -14,7 +14,7 @@ export const loader = async () => {
 
 export default function Index() {
   const { posts } = useLoaderData() as LoaderData;
-  console.log('posts', posts)
+  console.log("posts", posts);
 
   return (
     <div className="min-h-full">
@@ -53,7 +53,7 @@ export default function Index() {
             <h1 className="text-center text-3xl font-bold leading-tight tracking-tight text-gray-900">
               Web Studios
             </h1>
-            <h3 className="mt-3 text-center font-semibold leading-tight">
+            <h3 className="mt-3 mb-8 text-center font-semibold leading-tight">
               Web Development, Investing, and Career Tips!
             </h3>
           </div>
@@ -61,13 +61,18 @@ export default function Index() {
         <main>
           <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
             {/* <!-- Replace with your content --> */}
-            {posts.map((post) => (
-              <li key={post.slug}>
-                <Link to={post.slug} className="text-blue-600 underline">
-                  {post.title}
-                </Link>
-              </li>
-            ))}
+            <ul>
+              {posts.map((post) => (
+                <li key={post.slug}>
+                  <Link
+                    to={`/posts/${post.slug}`}
+                    className="text-blue-600 underline"
+                  >
+                    {post.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
             {/* <!-- /End replace --> */}
           </div>
         </main>
