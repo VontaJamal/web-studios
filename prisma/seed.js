@@ -24,27 +24,11 @@ async function seed() {
     },
   });
 
-  await prisma.note.create({
-    data: {
-      title: "My first note",
-      body: "Hello, world!",
-      userId: user.id,
-    },
-  });
-
-  await prisma.note.create({
-    data: {
-      title: "My second note",
-      body: "Hello, world!",
-      userId: user.id,
-    },
-  });
-
   const posts = [
     {
       slug: "my-first-post",
       title: "My First Post",
-      image: "x",
+      image: "https://imgur.com/4HMYYSk",
       markdown: `
 # This is my first post
 
@@ -54,7 +38,7 @@ Isn't it great?
     {
       slug: "90s-mixtape",
       title: "A Mixtape I Made Just For You",
-      image: "y",
+      image: "https://imgur.com/4HMYYSk",
       markdown: `
 # 90s Mixtape
 
