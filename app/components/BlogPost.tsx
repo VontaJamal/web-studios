@@ -1,22 +1,35 @@
+import { useState } from "react";
 import type { Post } from "~/models/post.server";
 import Tag from "./Tag";
 
 export default function BlogPost({ post }: { post: Post }) {
   console.log("post", post);
 
+  const [showDaggers, setShowDaggers] = useState(false);
+
+  const handleMouse = () => setShowDaggers((showing) => !showing);
+
   return (
-    <div className=" relative rounded shadow-lg transition-all ease-in-out hover:border-2 hover:border-red-700">
+    <div
+      className="relative rounded shadow-lg transition-all ease-in-out scale-95 hover:scale-100 h-full"
+      onMouseEnter={handleMouse}
+      onMouseLeave={handleMouse}
+    >
       <img
         height={40}
         width={40}
-        className="absolute -left-4 -top-14 inline"
+        className={`absolute -left-2 -top-12 inline transition-all ${
+          showDaggers ? "rotate-45 opacity-100" : "opacity-0"
+        }`}
         src="/assets/zidanedaggers.svg"
         alt="zidaneee"
       />
       <img
         height={40}
         width={40}
-        className="absolute -right-4 -bottom-14 inline"
+        className={`absolute -right-2 -bottom-12 inline transition-all ${
+          showDaggers ? "rotate-45 opacity-100" : "opacity-0"
+        }`}
         src="/assets/zidanedaggers.svg"
         alt="zidaneee"
       />

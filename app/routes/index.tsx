@@ -65,15 +65,9 @@ export default function Index() {
 
             <ul className="grid grid-cols-1 gap-5 p-10 sm:grid-cols-1 md:grid-cols-3">
               {posts.map((post) => (
-                <BlogPost key={post.slug} post={post} />
-                // <li key={post.slug}>
-                //   <Link
-                //     to={`/posts/${post.slug}`}
-                //     className="text-blue-600 underline"
-                //   >
-                //     {post.title}
-                //   </Link>
-                // </li>
+                <Link key={post.slug} to={`/posts/${post.slug}`}>
+                  <BlogPost post={post} />
+                </Link>
               ))}
             </ul>
             {/* <!-- /End replace --> */}
