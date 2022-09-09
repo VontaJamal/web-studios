@@ -21,9 +21,14 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 export default function PostSlug() {
   const { post, html } = useLoaderData() as LoaderData;
+  console.log('post', post)
+  const postDate = new Date(post.createdAt)
   return (
     <main className="mx-auto max-w-4xl">
-      <h1 className="my-6 border-b-2 text-center text-3xl">{post.title}</h1>
+      <div className="my-6 w-full border-b-2 text-center">
+        <h1 className="text-center text-3xl mb-4">{post.title}</h1>
+        <p>{postDate.toDateString()}</p>
+      </div>
       <div dangerouslySetInnerHTML={{ __html: html }} />
     </main>
   );
