@@ -27,8 +27,10 @@ export default function PostSlug() {
     <main className="mx-auto max-w-4xl">
       <div className="flex items-center">
         <div className="my-6 w-full border-b-2 text-center">
-          <h1 className="mb-4 text-center text-3xl">{post.title}</h1>
-          <p>{postDate.toDateString()}</p>
+          <h1 className="mb-4 text-center text-3xl text-custom-primary">
+            {post.title}
+          </h1>
+          <p className="mb-2">{postDate.toDateString()}</p>
         </div>
       </div>
       <div dangerouslySetInnerHTML={{ __html: html }} />
