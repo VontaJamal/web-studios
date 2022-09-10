@@ -11,7 +11,7 @@ export default function BlogPost({ post }: { post: Post }) {
 
   return (
     <div
-      className="relative rounded shadow-lg transition-all ease-in-out scale-95 hover:scale-100 h-full"
+      className="relative h-full scale-95 rounded bg-white shadow-lg shadow-custom-primary transition-all ease-in-out hover:scale-100"
       onMouseEnter={handleMouse}
       onMouseLeave={handleMouse}
     >
@@ -35,7 +35,7 @@ export default function BlogPost({ post }: { post: Post }) {
       />
       <img className="w-full" src={post.image} alt={`${post.title} cover`} />
       <div className="px-6 py-4">
-        <div className="mb-2 text-2xl font-bold">{post.title}</div>
+        <div className="mb-2 text-2xl font-bold text-black">{post.title}</div>
         <div className="px-6 pt-4 pb-2">
           {post.tags.map((tag) => (
             <Tag key={tag} tag={tag} />

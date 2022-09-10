@@ -10,11 +10,15 @@ import {
 } from "@remix-run/react";
 
 import tailwindStylesheetUrl from "./styles/tailwind.css";
+import rootStyleSheetUrl from "./styles/root.css";
 import { getUser } from "./session.server";
 import Header from "./components/Header";
 
 export const links: LinksFunction = () => {
-  return [{ rel: "stylesheet", href: tailwindStylesheetUrl }];
+  return [
+    { rel: "stylesheet", href: tailwindStylesheetUrl },
+    { rel: "stylesheet", href: rootStyleSheetUrl },
+  ];
 };
 
 export const meta: MetaFunction = () => ({
@@ -31,7 +35,7 @@ export async function loader({ request }: LoaderArgs) {
 
 export default function App() {
   return (
-    <html lang="en" className="h-full">
+    <html lang="en" className="h-full bg-neutral-900">
       <head>
         <Meta />
         <Links />

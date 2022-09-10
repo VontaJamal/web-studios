@@ -18,7 +18,7 @@ export default function Header() {
             </div>
             <div className="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
               <button
-                className="inline-flex items-center border-b-2 border-custom-primary px-1 pt-1 text-sm font-medium text-gray-900"
+                className="inline-flex items-center border-b-2 border-custom-primary px-1 pt-1 font-medium"
                 aria-current="page"
               >
                 Blog
