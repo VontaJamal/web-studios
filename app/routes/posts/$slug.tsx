@@ -1,6 +1,6 @@
 import { marked } from "marked";
 import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import { getPost } from "~/models/post.server";
 
@@ -21,15 +21,22 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 export default function PostSlug() {
   const { post, html } = useLoaderData() as LoaderData;
-  console.log('post', post)
-  const postDate = new Date(post.createdAt)
+  console.log("post", post);
+  const postDate = new Date(post.createdAt);
   return (
     <main className="mx-auto max-w-4xl">
-      <div className="my-6 w-full border-b-2 text-center">
-        <h1 className="text-center text-3xl mb-4">{post.title}</h1>
-        <p>{postDate.toDateString()}</p>
+      <div className="flex items-center">
+        <div className="my-6 w-full border-b-2 text-center">
+          <h1 className="mb-4 text-center text-3xl">{post.title}</h1>
+          <p>{postDate.toDateString()}</p>
+        </div>
       </div>
       <div dangerouslySetInnerHTML={{ __html: html }} />
+      <div className="w-full text-center">
+        <Link to={"/"}>
+          <span className="text-2xl">&larr; Home</span>
+        </Link>
+      </div>
     </main>
   );
 }
