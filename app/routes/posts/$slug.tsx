@@ -34,7 +34,9 @@ export default function PostSlug() {
       <div dangerouslySetInnerHTML={{ __html: html }} />
       <div className="w-full text-center">
         <Link to={"/"}>
-          <span className="text-2xl">&larr; Home</span>
+          <span className="text-2xl">
+            <span className="text-custom-primary">&larr;</span> Home
+          </span>
         </Link>
       </div>
     </main>
