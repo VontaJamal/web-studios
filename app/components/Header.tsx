@@ -1,3 +1,5 @@
+import { Link } from "@remix-run/react";
+
 export default function Header() {
   return (
     <nav>
@@ -5,16 +7,20 @@ export default function Header() {
         <div className="flex h-16 justify-between">
           <div className="flex">
             <div className="flex flex-shrink-0 items-center">
-              <img
-                className="block h-8 w-auto lg:hidden"
-                src="/assets/ws.svg"
-                alt="Workflow"
-              />
-              <img
-                className="hidden h-12 w-auto lg:block"
-                src="/assets/ws.svg"
-                alt="Workflow"
-              />
+              <Link to={"/"}>
+                <img
+                  className="hidden h-16 w-auto lg:block mt-4"
+                  src="/assets/ws.svg"
+                  alt="Workflow"
+                />
+              </Link>
+              <Link to={"/"}>
+                <img
+                  className="block h-14 w-auto lg:hidden mt-4"
+                  src="/assets/ws.svg"
+                  alt="Workflow"
+                />
+              </Link>
             </div>
             <div className="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
               <button
