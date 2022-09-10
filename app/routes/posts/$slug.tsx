@@ -26,7 +26,7 @@ export default function PostSlug() {
   return (
     <main className="mx-auto max-w-4xl">
       <div className="flex items-center">
-        <div className="my-6 w-full border-b-2 text-center">
+        <div className="my-6 w-full border-b-2 border-custom-primary text-center">
           <h1 className="mb-4 text-center text-3xl text-custom-primary">
             {post.title}
           </h1>
